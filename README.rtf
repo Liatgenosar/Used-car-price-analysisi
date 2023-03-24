@@ -1,66 +1,88 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2513
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 AppleColorEmoji;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww16440\viewh13200\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 \
-\
+What impacts Car Price?
+
+See the full jupyter notebook code project and analysis in the file: PA11_1_Used_Car_pricing_final.ipynb
+The file contains conclusions and recommendations to the client.
+
+  This is a case study for Practical Application 11.1.
+  My client is a used cars dealership. I analyzed a large dataset of over 400,000 used cars details, 
+to come up with a data prepared for a linear 
+  Regression model - a multiple regression, as there are many features.
+  After cleaning (and filling some) missing values, the dataset's size for modeling was: 272037 entries, 13 features 
+  (of them 3 are numeric and the rest categorical), and a numeric target - price, column.
+
+
+  In the attached Jupyter Notebook: PA11_1_Used_Car_pricing_final.ipynb, you can see the entire technical work: data inspection, data exploration, preparation, modeling, and conclusions.
+
+  PA11_1_Used_Car_pricing_final.ipynb Sections are:
+
+  - Import Data
+  - Data Inspection 
+  - EDA, Data Cleaning, Filling Missing Values 
+      Filling missing values
+      Removing outliers.
+      Histograms of numeric data.
+  - Exploring Categorical Features - Data Preparation: Data Cleaning and Engineering.
+      Cleaning missing values
+      Crosstab of features, and using it to fill missing values.
+      Bar and Boxplots to explore categorical data, plus correlation to the price (target column).
+      Engineering condition, region and state columns. 
+      Engineering model feature to be represented by model frequency.
+ - Prepare dataset for Modeling
+ - Modeling: Multiple Regression. Including column transformer pipeline, and a gridSearchCV.
+         Models used:
+    1. Prepared dataset
+    2. Dataset with the logarithm of the price column: that got the same score and mse.
+
+ - Overview of the Dataset and Conclusions: Recommendations to the client.\
+
+   The used cars dataset is very large and can give a lot of insights to what drives a car's price
+- The dataset consists of a few numeric (odometer, year) features and mostly categorical features like: condition, title status, type, size, number of cylinders, paint color, manufacturer, model and region. A categorical feature like condition was turned into ordinal (numeric).
+- The dataset is very large. Data preparation included filling and cleaning missing values, cleaning outliers, feature engineering so columns like region and state were represented numerical according to their correlation with each of their unique value with their median price.
+- A special challenge was to represent a categorical column like model, that consists of thousands of unique values. This column was not included in the data that went into the model. Manufacturer feature has about 40 unique values, and a preliminary data inspection shown it to be correlated with the price.
+
+Results:
+
+Multiple Regression GridSearch, Test score:  0.50373
+
+Sorted model coefficients, top 20:
+
+
+   Coef name	          value
+	manufacturer_gmc	    81779.720240
+	manufacturer_buick	 22680.381392
+	manufacturer_volvo	 13919.508798
+	manufacturer_fiat	    13809.978180
+	cylinders_12 cylinders	  13062.256464
+	fuel_hybrid	            12541.242305
+	manufacturer_harley-davidson	-10749.557209
+	manufacturer_saturn	   10329.357344
+	drive_rwd            	8924.087335
+	manufacturer_infiniti	-8819.676433
+	manufacturer_toyota	   -8313.829542
+	manufacturer_porsche 	-8183.114888
+	type_SUV	               7659.534457
+	title_status_salvage	   7360.567671
+	manufacturer_lincoln	   -6968.247888
+	type_convertible	      6798.599927
+	manufacturer_ferrari	   -6783.074811
+	manufacturer_jeep	      -6627.962707
+	manufacturer_mini	      -6584.227939
+	manufacturer_ram	      -6359.719321
    
-\fs28 README: Case Study
-\f1 \uc0\u55357 \u56531 
-\f0 : What impacts Car Price?\
-\
-  This is a case study for Practical Application 11.1.\
-  My client is a used cars dealership. I analyzed a large dataset of over 400,000 used cars details, to come up with a data prepared for a linear \
-  Regression model - a multiple regression, as there are many features.\
-\
-\
- - Overview file: PA_11_1_Overview.ipynb (attached in this repository). Contains conclusions and recommendations to the client.\
-\
-  In the attached Jupyter Notebook: PA11_1_Used_Car_pricing.ipynb, you can see the entire technical work: data inspection, data exploration, preparation, modeling\
-  And conclusions.\
-\
-  PA11_1_Used_Car_pricing.ipynb Sections are:\
-\
-  - Import Data\
-  - Data Inspection \
-  - EDA, Data Cleaning, Filling Missing Values \
-      Filling missing values\
-      Removing outliers.\
-      Histograms of numeric data.\
-  - Exploring Categorical Features - Data Preparation: Data Cleaning and Engineering.\
-      Cleaning missing values\
-      Crosstab of features, and using it to fill missing values.\
-      Bar and Boxplots to explore categorical data, plus correlation to the price (target column).\
-      Engineering condition, region and state columns. \
-      Engineering model feature to be represented by model frequency.\
- - Prepare dataset for Modeling\
- - Modeling: Multiple Regression. Including column transformer pipeline, and a gridSearchCV.\
-         Models used:\
-    1. Prepared dataset\
-    2. Prepared dataset without model frequency column.\
-    3. Dataset with the logarithm of the price column: that got the best score and mse.\
-- Overview of the Dataset and Conclusions: Recommendations to the client.\
-\
-   The used cars dataset is very large and can give a lot of insights to what drives a car's price.\
-- The dataset consists of a few numeric (odometer, year) features and mostly categorical features like: condition, title status, type, size, number of cylinders, paint color, manufacturer, model and region. A categorical feature like condition was turned into ordinal (numeric).\
-- The dataset is very large. Data preparation included filling and cleaning missing values, cleaning outliers, feature engineering so columns like region and state were represented numerical according to their correlation with each of their unique value with their median price.\
-- A special challenge was to represent a categorical column like model, that consists of thousands of unique values. This column was not included in the data that went into the model. Manufacturer feature has about 40 unique values, and a preliminary data inspection shown it to be correlated with the price.\
-- Results of a multiple linear regression model of the dataset showed a superior predictive performance with a logarithmic transformation of the target column (price). \
-- The data prepared for the model did not contain the size column, since it has a lot of missing values, but did have the car type feature which is somewhat overlaps with it. Region and state features were represented by their relative weight of the price, thus turned numeric. Model feature was not included to not overwhelm the data size, since it had over 10,000 unique values.\
-- All three different models (with changes of data going in) were consistent to show that the top factors that drive the price of a car are the manufacturer. The type of the car has a big influence too, as it was represented in the top factors by the number of cylinders. Other top factors that drive the price are: clean title status, fuel: diesel, and year.\
-- For further improvement of the model's price prediction, I suggest: regularization of features, more feature engineering, such as polynomial features. And mostly - since manufacturer was such a crucial factor that drives a car's price, a better and sophisticated way to implement and represent the model feature should be in place, since model and manufacturer are related to one another. That can contribute to a better fine-tune of the price prediction.\
-- I recommend to my clients to provide more business details that can fine tune into manufacturers and models: data such as supply and demand per models and manufacturers, per region and per state.\
- \
- \
-\
-\
-\
-\
-\
-\
-\
-\
-}
+   
+   Multiple Regression GridSearch, Log(Target), Test score:  0.50373
+   
+   Summary and Findings
+   
+The multiple regression model was found to have a very good predictive power, with a small Test set MSE of 0.5037. Out of all the various features of a used car, such as year manufactured, odometer read, paint color,manufacturer, condition, number of cylinders, fuel type, drive, and type, the most influential on car price were a few car manufacturers. Out of top 10 factors that increases a used car price, top 4 were manufacturers. Other features of used car that has a lot of influence on its price are: cylinders_12 cylinders, fuel_hybrid, manufacturer_saturn, drive_rwd, type_SUV, and title_status: salvage.
+Top 4 manufacturers to increase a used car price: manufacturer_gmc, manufacturer_buick, manufacturer_volvo, manufacturer_fiat.
+Top 7 features that inversely affect a used car price: manufacturer_harley-davidson manufacturer_harley-davidson manufacturer_infiniti manufacturer_toyota manufacturer_porsche manufacturer_lincoln manufacturer_ferrari manufacturer_jeep
+My reccomendation for car dealers is to look out after market demand and find those car brands in high demands to get better sales. GMC, Buick, Volvo, and Fiat seem like a sought after car brands.
+
+
+Next Steps
+
+This model together with its data preparation methods are not done yet. I recommend to further explore how treating missing values differently, and including the model feature as a category can change the model predictions and features importance. I also recommend to explore how leaving out outliers like very old cars (cars older than 25 years) can influence the model predictive power. Used car 25 years old and under are the majority of the market, and very old/antique cars might have rules of their own.
+
+ 
