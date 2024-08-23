@@ -37,11 +37,15 @@ The file contains conclusions and recommendations to the client.
  - Overview of the Dataset and Conclusions: Recommendations to the client.\
 
    The used cars dataset is very large and can give a lot of insights to what drives a car's price
-- The dataset consists of a few numeric (odometer, year) features and mostly categorical features like: condition, title status, type, size, number of cylinders, paint color, manufacturer, model and region. A categorical feature like condition was turned into ordinal (numeric).
-- The dataset is very large. Data preparation included filling and cleaning missing values, cleaning outliers, feature engineering so columns like region and state were represented numerical according to their correlation with each of their unique value with their median price.
-- A special challenge was to represent a categorical column like model, that consists of thousands of unique values. This column was not included in the data that went into the model. Manufacturer feature has about 40 unique values, and a preliminary data inspection shown it to be correlated with the price.
+- The dataset consists of a few numeric (odometer, year) features and mostly categorical features like: condition, title status, type, size, 
+number of cylinders, paint color, manufacturer, model and region. A categorical feature like condition was turned into ordinal (numeric).
+- The dataset is very large. Data preparation included filling and cleaning missing values, cleaning outliers, feature engineering so columns 
+like region and state were represented numerical according to their correlation with each of their unique value with their median price.
+- A special challenge was to represent a categorical column like model, that consists of thousands of unique values. 
+This column was not included in the data that went into the model. Manufacturer feature has about 40 unique values, and a preliminary data 
+inspection shown it to be correlated with the price.
 
-Results:
+<b>Results:
 
 Multiple Regression GridSearch, Test score:  0.50373
 
@@ -76,7 +80,8 @@ __________________________________________________________________
    
    Summary and Findings
    
-The multiple regression model was found to have a very good predictive power, with a small Test set MSE of 0.5037. Out of all the various features of a used car, such as year manufactured, odometer read, paint color,manufacturer, condition, number of cylinders, fuel type, drive, and type, the most influential on car price were a few car manufacturers. Out of top 10 factors that increases a used car price, top 4 were manufacturers. Other features of used car that has a lot of influence on its price are: cylinders_12 cylinders, fuel_hybrid, manufacturer_saturn, drive_rwd, type_SUV, and title_status: salvage.
+The multiple regression model was found to have a very good predictive power, with a small Test set MSE of 0.5037. 
+Out of all the various features of a used car, such as year manufactured, odometer read, paint color,manufacturer, condition, number of cylinders, fuel type, drive, and type, the most influential on car price were a few car manufacturers. Out of top 10 factors that increases a used car price, top 4 were manufacturers. Other features of used car that has a lot of influence on its price are: cylinders_12 cylinders, fuel_hybrid, manufacturer_saturn, drive_rwd, type_SUV, and title_status: salvage.
 Top 4 manufacturers to increase a used car price: manufacturer_gmc, manufacturer_buick, manufacturer_volvo, manufacturer_fiat.
 Top 7 features that inversely affect a used car price: manufacturer_harley-davidson manufacturer_harley-davidson manufacturer_infiniti manufacturer_toyota manufacturer_porsche manufacturer_lincoln manufacturer_ferrari manufacturer_jeep
 My reccomendation for car dealers is to look out after market demand and find those car brands in high demands to get better sales. GMC, Buick, Volvo, and Fiat seem like a sought after car brands.
